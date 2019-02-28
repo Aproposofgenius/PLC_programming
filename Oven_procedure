@@ -1,0 +1,29 @@
+VAR
+
+S1 AT %I0.0		:BOOL;
+S2 AT %I0.1 	:BOOL;
+HORN AT %Q2.0 :BOOL;
+COIL AT %Q2.1 :BOOL;
+FAN AT %Q2.2  :BOOL;
+AUTO   				:BOOL;
+TON1					:TON;
+TOF1					:TOF;
+time1					:time:=T#5S;
+time2					:time:=T#15s;     
+END_VAR
+
+TON1(IN:=AUTO, PT:=time1);
+TOF1(IN:=AUTO, PT:=time2);
+
+IF S1=TRUE THEN
+AUTO:= TRUE;
+END_IF;
+
+
+IF NOT S2=FALSE THEN
+AUTO:=FALSE;
+END_IF;
+
+HORN:= AUTO AND NOT TON1.Q;  
+COIL:= TON1.Q;
+FAN:=TOF1.Q;
