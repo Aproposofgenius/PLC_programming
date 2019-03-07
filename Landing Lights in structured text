@@ -1,0 +1,61 @@
+H1 at %Q2.0 :BOOL;
+H2 at %Q2.1 :BOOL;
+H3 at %Q2.2 :BOOL;
+H4 AT %Q2.3 :BOOL;
+H5 AT %Q2.4 :BOOL;
+H6 AT %Q2.5 :BOOL;
+H7 AT %Q2.6 :BOOL;
+H8 AT %Q2.7 :BOOL;
+RESET	    	:BOOL;
+ct1					:CTU;
+clk					:clock;
+END_VAR
+
+clk(in:=S1, pt:=T#500ms);
+ct1(cu:=clk.q, r:=RESET, pv:=0)    
+
+if ct1.cv = 1.0 then
+H1:=true;
+end_if;  
+
+if ct1.cv = 2.0 then
+H2:=true;
+end_if; 
+
+if ct1.cv = 3.0 then
+H3:=true;
+end_if;
+
+if ct1.cv = 4.0 then
+H4:=true;
+end_if;
+
+if ct1.cv = 5.0 then
+H5:=true;
+end_if;
+
+if ct1.cv = 6.0 then
+H6:=true;
+end_if;
+
+if ct1.cv = 7.0 then
+H7:=true;
+end_if;
+
+if ct1.cv = 8.0 then
+H8:=true;
+end_if;     
+
+IF NOT S1 OR ct1.cv >=9.0 then
+RESET:= TRUE;
+H1:=FALSE;
+H2:=FALSE;
+H3:=FALSE;
+H4:=FALSE;
+H5:=FALSE;
+H6:=FALSE;
+H7:=FALSE;
+H8:=FALSE;
+
+else RESET:=FALSE;
+end_if;
